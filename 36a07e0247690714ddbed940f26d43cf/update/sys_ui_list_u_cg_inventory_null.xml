@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_list parent="" relationship="" sys_domain="global" table="u_cg_inventory" version="2" view="">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_name</element>
+            <list_id display_value="u_cg_inventory" element="NULL" name="u_cg_inventory" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">b7afe07247698354ddbed940f26d4371</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+            <sys_created_on>2026-06-21 19:18:06</sys_created_on>
+            <sys_id>77afe07247698354ddbed940f26d4372</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+            <sys_updated_on>2026-06-21 19:18:06</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_active</element>
+            <list_id display_value="u_cg_inventory" element="NULL" name="u_cg_inventory" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">b7afe07247698354ddbed940f26d4371</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+            <sys_created_on>2026-06-21 19:18:06</sys_created_on>
+            <sys_id>fbafe07247698354ddbed940f26d4372</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+            <sys_updated_on>2026-06-21 19:18:06</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_is_customized</element>
+            <list_id display_value="u_cg_inventory" element="NULL" name="u_cg_inventory" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">b7afe07247698354ddbed940f26d4371</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+            <sys_created_on>2026-06-21 19:18:06</sys_created_on>
+            <sys_id>73afe07247698354ddbed940f26d4373</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+            <sys_updated_on>2026-06-21 19:18:06</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_category</element>
+            <list_id display_value="u_cg_inventory" element="NULL" name="u_cg_inventory" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">b7afe07247698354ddbed940f26d4371</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+            <sys_created_on>2026-06-21 19:18:06</sys_created_on>
+            <sys_id>f7afe07247698354ddbed940f26d4373</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+            <sys_updated_on>2026-06-21 19:18:06</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_scope</element>
+            <list_id display_value="u_cg_inventory" element="NULL" name="u_cg_inventory" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">b7afe07247698354ddbed940f26d4371</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>4</position>
+            <sum>false</sum>
+            <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+            <sys_created_on>2026-06-21 19:18:06</sys_created_on>
+            <sys_id>7fafe07247698354ddbed940f26d4373</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+            <sys_updated_on>2026-06-21 19:18:06</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_status</element>
+            <list_id display_value="u_cg_inventory" element="NULL" name="u_cg_inventory" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">b7afe07247698354ddbed940f26d4371</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>5</position>
+            <sum>false</sum>
+            <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+            <sys_created_on>2026-06-21 19:18:06</sys_created_on>
+            <sys_id>f3afe07247698354ddbed940f26d4374</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+            <sys_updated_on>2026-06-21 19:18:06</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_table_name</element>
+            <list_id display_value="u_cg_inventory" element="NULL" name="u_cg_inventory" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">b7afe07247698354ddbed940f26d4371</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>6</position>
+            <sum>false</sum>
+            <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+            <sys_created_on>2026-06-21 19:18:06</sys_created_on>
+            <sys_id>7bafe07247698354ddbed940f26d4374</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+            <sys_updated_on>2026-06-21 19:18:06</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_update_set</element>
+            <list_id display_value="u_cg_inventory" element="NULL" name="u_cg_inventory" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">b7afe07247698354ddbed940f26d4371</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>7</position>
+            <sum>false</sum>
+            <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+            <sys_created_on>2026-06-21 19:18:06</sys_created_on>
+            <sys_id>ffafe07247698354ddbed940f26d4374</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+            <sys_updated_on>2026-06-21 19:18:06</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_last_updated_by</element>
+            <list_id display_value="u_cg_inventory" element="NULL" name="u_cg_inventory" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">b7afe07247698354ddbed940f26d4371</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>8</position>
+            <sum>false</sum>
+            <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+            <sys_created_on>2026-06-21 19:18:06</sys_created_on>
+            <sys_id>77afe07247698354ddbed940f26d4375</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+            <sys_updated_on>2026-06-21 19:18:06</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>u_last_snapshot</element>
+            <list_id display_value="u_cg_inventory" element="NULL" name="u_cg_inventory" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">b7afe07247698354ddbed940f26d4371</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>9</position>
+            <sum>false</sum>
+            <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+            <sys_created_on>2026-06-21 19:18:06</sys_created_on>
+            <sys_id>fbafe07247698354ddbed940f26d4375</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+            <sys_updated_on>2026-06-21 19:18:06</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>u_cg_inventory</name>
+            <parent/>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+            <sys_created_on>2026-06-21 19:18:06</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_domain>global</sys_domain>
+            <sys_id>b7afe07247698354ddbed940f26d4371</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>u_cg_inventory</sys_name>
+            <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Customization Governance">36a07e0247690714ddbed940f26d43cf</sys_scope>
+            <sys_update_name>sys_ui_list_u_cg_inventory_null</sys_update_name>
+            <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+            <sys_updated_on>2026-06-21 19:18:06</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+</record_update>

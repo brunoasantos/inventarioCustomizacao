@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>false</advanced>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_run_end/>
+        <entered_run_start/>
+        <entered_time/>
+        <max_drift/>
+        <name>CG - Customization Governance - Weekly Inventory</name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <repeat_every/>
+        <run_as display_value="Administrador Sistema">e3d1430a0f49210068a24b9ce1050e02</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>7</run_dayofweek>
+        <run_daysofweek/>
+        <run_end/>
+        <run_month/>
+        <run_period/>
+        <run_start>2026-06-21 18:55:38</run_start>
+        <run_time>1970-01-01 05:00:00</run_time>
+        <run_type>weekly</run_type>
+        <run_weekinmonth/>
+        <script><![CDATA[var collector = new CG_InventoryCollector();
+var results = collector.runFullInventory();
+
+gs.info('CG Scheduled Job: coleta concluida.');
+gs.info('Total: ' + results.collected + ' artefatos.');
+gs.info('Erros: ' + results.errors.length);
+
+if (results.errors.length > 0) {
+    for (var i = 0; i < results.errors.length; i++) {
+        gs.warn('CG Erro: ' + results.errors[i]);
+    }
+}]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+        <sys_created_on>2026-06-21 18:56:16</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>be8ae03a47e58354ddbed940f26d4328</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CG - Customization Governance - Weekly Inventory</sys_name>
+        <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Customization Governance">36a07e0247690714ddbed940f26d43cf</sys_scope>
+        <sys_update_name>sysauto_script_be8ae03a47e58354ddbed940f26d4328</sys_update_name>
+        <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+        <sys_updated_on>2026-06-21 18:56:16</sys_updated_on>
+        <time_zone/>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>be8ae03a47e58354ddbed940f26d4328</id>
+        <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+        <sys_created_on>2026-06-21 18:56:16</sys_created_on>
+        <sys_id>4cbae83a47e58354ddbed940f26d43fe</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+        <sys_updated_on>2026-06-21 18:56:16</sys_updated_on>
+        <table>sysauto_script</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

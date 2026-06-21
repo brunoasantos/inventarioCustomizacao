@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="par_dashboard_tab">
+    <par_dashboard_tab action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <background_color/>
+        <dashboard display_value="Customization Governance">794ce03247298354ddbed940f26d4390</dashboard>
+        <name>New Tab 62</name>
+        <order>0</order>
+        <sys_class_name>par_dashboard_tab</sys_class_name>
+        <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+        <sys_created_on>2026-06-21 19:03:13</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_id>f54ce03247298354ddbed940f26d43e4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>New Tab 62</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Customization Governance">36a07e0247690714ddbed940f26d43cf</sys_scope>
+        <sys_update_name>par_dashboard_tab_f54ce03247298354ddbed940f26d43e4</sys_update_name>
+        <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+        <sys_updated_on>2026-06-21 19:03:13</sys_updated_on>
+    </par_dashboard_tab>
+</record_update>

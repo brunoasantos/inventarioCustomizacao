@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>global.CG_InventoryCollector</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Coleta metadados de customizações da instância para o Customization Governance</description>
+        <mobile_callable>false</mobile_callable>
+        <name>CG_InventoryCollector</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var CG_InventoryCollector = Class.create();
+CG_InventoryCollector.prototype = {
+
+    initialize: function() {
+        this.EXCLUDED_SCOPES = gs.getProperty('cg.excluded_scopes', '');
+        this.INVENTORY_TABLE = 'u_cg_inventory';
+        this.results = {
+            collected: 0,
+            errors: []
+        };
+    },
+
+    _addScopeExclusion: function(gr) {
+        if (!this.EXCLUDED_SCOPES) return;
+        var scopes = this.EXCLUDED_SCOPES.split(',');
+        for (var i = 0; i < scopes.length; i++) {
+            var scope = scopes[i].trim();
+            if (scope) gr.addQuery('sys_scope', '!=', scope);
+        }
+    },
+
+    _getUpdateSetInfo: function(sysId, tableName) {
+        var result = {
+            update_set: '',
+            updated_on: '',
+            updated_by: ''
+        };
+        try {
+            var xml = new GlideRecord('sys_update_xml');
+            xml.addQuery('name', 'CONTAINS', sysId);
+            xml.orderByDesc('sys_updated_on');
+            xml.setLimit(1);
+            xml.query();
+            if (xml.next()) {
+                result.update_set = xml.getDisplayValue('update_set');
+                result.updated_on = xml.getValue('sys_updated_on');
+                result.updated_by = xml.getValue('sys_updated_by');
+            }
+        } catch(e) {
+            gs.warn('CG_InventoryCollector: erro ao buscar update set para ' + sysId);
+        }
+        return result;
+    },
+
+    runFullInventory: function() {
+        this._collectCustomTables();
+        this._collectCustomFields();
+        this._collectBusinessRules();
+        this._collectClientScripts();
+        this._collectUIPolicies();
+        this._collectUIActions();
+        this._collectScriptIncludes();
+        this._collectScheduledJobs();
+        this._collectFlows();
+        this._collectRecordProducers();
+        this._collectNotifications();
+        this._collectInboundActions();
+        this._collectSLAs();
+        this._collectACLs();
+
+        gs.info('CG_InventoryCollector: coleta concluida. Total: '
+            + this.results.collected + ' artefatos. Erros: '
+            + this.results.errors.length);
+        return this.results;
+    },
+
+    _collectCustomTables: function() {
+        var gr = new GlideRecord('sys_db_object');
+        gr.addQuery('sys_update_name', 'ISNOTEMPTY', '');
+        gr.addQuery('name', 'STARTSWITH', 'u_')
+          .addOrCondition('name', 'STARTSWITH', 'x_');
+        this._addScopeExclusion(gr);
+        gr.query();
+        while (gr.next()) {
+            var isCustom = global.SncAppFiles.hasCustomerUpdate(gr);
+            if (!isCustom) continue;
+            var usInfo = this._getUpdateSetInfo(gr.getValue('sys_id'), 'sys_db_object');
+            this._saveRecord({
+                category:    'Custom Table',
+                name:        gr.getValue('name'),
+                label:       gr.getDisplayValue('label'),
+                scope:       gr.getDisplayValue('sys_scope'),
+                sys_id:      gr.getValue('sys_id'),
+                active:      'true',
+                is_customized: true,
+                update_set:  usInfo.update_set,
+                updated_on:  usInfo.updated_on,
+                updated_by:  usInfo.updated_by
+            });
+        }
+    },
+
+    _collectCustomFields: function() {
+        var gr = new GlideRecord('sys_dictionary');
+        gr.addQuery('sys_update_name', 'ISNOTEMPTY', '');
+        gr.addQuery('element', 'STARTSWITH', 'u_');
+        gr.addQuery('name', 'IN', [
+            'sn_customerservice_case','task','incident',
+            'sc_request','sc_req_item','change_request','problem'
+        ].join(','));
+        this._addScopeExclusion(gr);
+        gr.query();
+        while (gr.next()) {
+            var isCustom = global.SncAppFiles.hasCustomerUpdate(gr);
+            if (!isCustom) continue;
+            var usInfo = this._getUpdateSetInfo(gr.getValue('sys_id'), 'sys_dictionary');
+            this._saveRecord({
+                category:    'Custom Field',
+                name:        gr.getValue('element'),
+                label:       gr.getDisplayValue('column_label'),
+                scope:       gr.getDisplayValue('sys_scope'),
+                sys_id:      gr.getValue('sys_id'),
+                table_name:  gr.getValue('name'),
+                active:      'true',
+                is_customized: true,
+                update_set:  usInfo.update_set,
+                updated_on:  usInfo.updated_on,
+                updated_by:  usInfo.updated_by
+            });
+        }
+    },
+
+    _collectBusinessRules: function() {
+        var gr = new GlideRecord('sys_script');
+        gr.addQuery('sys_update_name', 'ISNOTEMPTY', '');
+        this._addScopeExclusion(gr);
+        gr.query();
+        while (gr.next()) {
+            var isCustom = global.SncAppFiles.hasCustomerUpdate(gr);
+            if (!isCustom) continue;
+            var usInfo = this._getUpdateSetInfo(gr.getValue('sys_id'), 'sys_script');
+            this._saveRecord({
+                category:    'Business Rule',
+                name:        gr.getValue('name'),
+                label:       gr.getValue('name'),
+                scope:       gr.getDisplayValue('sys_scope'),
+                sys_id:      gr.getValue('sys_id'),
+                table_name:  gr.getValue('collection'),
+                active:      gr.getValue('active'),
+                is_customized: true,
+                update_set:  usInfo.update_set,
+                updated_on:  usInfo.updated_on,
+                updated_by:  usInfo.updated_by
+            });
+        }
+    },
+
+    _collectClientScripts: function() {
+        var gr = new GlideRecord('sys_script_client');
+        gr.addQuery('sys_update_name', 'ISNOTEMPTY', '');
+        this._addScopeExclusion(gr);
+        gr.query();
+        while (gr.next()) {
+            var isCustom = global.SncAppFiles.hasCustomerUpdate(gr);
+            if (!isCustom) continue;
+            var usInfo = this._getUpdateSetInfo(gr.getValue('sys_id'), 'sys_script_client');
+            this._saveRecord({
+                category:    'Client Script',
+                name:        gr.getValue('name'),
+                label:       gr.getValue('name'),
+                scope:       gr.getDisplayValue('sys_scope'),
+                sys_id:      gr.getValue('sys_id'),
+                table_name:  gr.getValue('table'),
+                active:      gr.getValue('active'),
+                is_customized: true,
+                update_set:  usInfo.update_set,
+                updated_on:  usInfo.updated_on,
+                updated_by:  usInfo.updated_by
+            });
+        }
+    },
+
+    _collectUIPolicies: function() {
+        var gr = new GlideRecord('sys_ui_policy');
+        gr.addQuery('sys_update_name', 'ISNOTEMPTY', '');
+        this._addScopeExclusion(gr);
+        gr.query();
+        while (gr.next()) {
+            var isCustom = global.SncAppFiles.hasCustomerUpdate(gr);
+            if (!isCustom) continue;
+            var usInfo = this._getUpdateSetInfo(gr.getValue('sys_id'), 'sys_ui_policy');
+            this._saveRecord({
+                category:    'UI Policy',
+                name:        gr.getValue('short_description'),
+                label:       gr.getValue('short_description'),
+                scope:       gr.getDisplayValue('sys_scope'),
+                sys_id:      gr.getValue('sys_id'),
+                table_name:  gr.getValue('model_table'),
+                active:      gr.getValue('active'),
+                is_customized: true,
+                update_set:  usInfo.update_set,
+                updated_on:  usInfo.updated_on,
+                updated_by:  usInfo.updated_by
+            });
+        }
+    },
+
+    _collectUIActions: function() {
+        var gr = new GlideRecord('sys_ui_action');
+        gr.addQuery('sys_update_name', 'ISNOTEMPTY', '');
+        this._addScopeExclusion(gr);
+        gr.query();
+        while (gr.next()) {
+            var isCustom = global.SncAppFiles.hasCustomerUpdate(gr);
+            if (!isCustom) continue;
+            var usInfo = this._getUpdateSetInfo(gr.getValue('sys_id'), 'sys_ui_action');
+            this._saveRecord({
+                category:    'UI Action',
+                name:        gr.getValue('name'),
+                label:       gr.getValue('name'),
+                scope:       gr.getDisplayValue('sys_scope'),
+                sys_id:      gr.getValue('sys_id'),
+                table_name:  gr.getValue('table'),
+                active:      gr.getValue('active'),
+                is_customized: true,
+                update_set:  usInfo.update_set,
+                updated_on:  usInfo.updated_on,
+                updated_by:  usInfo.updated_by
+            });
+        }
+    },
+
+    _collectScriptIncludes: function() {
+        var gr = new GlideRecord('sys_script_include');
+        gr.addQuery('sys_update_name', 'ISNOTEMPTY', '');
+        this._addScopeExclusion(gr);
+        gr.query();
+        while (gr.next()) {
+            var isCustom = global.SncAppFiles.hasCustomerUpdate(gr);
+            if (!isCustom) continue;
+            var usInfo = this._getUpdateSetInfo(gr.getValue('sys_id'), 'sys_script_include');
+            this._saveRecord({
+                category:    'Script Include',
+                name:        gr.getValue('name'),
+                label:       gr.getValue('name'),
+                scope:       gr.getDisplayValue('sys_scope'),
+                sys_id:      gr.getValue('sys_id'),
+                active:      gr.getValue('active'),
+                is_customized: true,
+                update_set:  usInfo.update_set,
+                updated_on:  usInfo.updated_on,
+                updated_by:  usInfo.updated_by
+            });
+        }
+    },
+
+    _collectScheduledJobs: function() {
+        var gr = new GlideRecord('sysauto_script');
+        gr.addQuery('sys_update_name', 'ISNOTEMPTY', '');
+        this._addScopeExclusion(gr);
+        gr.query();
+        while (gr.next()) {
+            var isCustom = global.SncAppFiles.hasCustomerUpdate(gr);
+            if (!isCustom) continue;
+            var usInfo = this._getUpdateSetInfo(gr.getValue('sys_id'), 'sysauto_script');
+            this._saveRecord({
+                category:    'Scheduled Job',
+                name:        gr.getValue('name'),
+                label:       gr.getValue('name'),
+                scope:       gr.getDisplayValue('sys_scope'),
+                sys_id:      gr.getValue('sys_id'),
+                active:      gr.getValue('active'),
+                is_customized: true,
+                update_set:  usInfo.update_set,
+                updated_on:  usInfo.updated_on,
+                updated_by:  usInfo.updated_by
+            });
+        }
+    },
+
+    _collectFlows: function() {
+        var gr = new GlideRecord('sys_hub_flow');
+        gr.addQuery('sys_update_name', 'ISNOTEMPTY', '');
+        this._addScopeExclusion(gr);
+        gr.query();
+        while (gr.next()) {
+            var isCustom = global.SncAppFiles.hasCustomerUpdate(gr);
+            if (!isCustom) continue;
+            var usInfo = this._getUpdateSetInfo(gr.getValue('sys_id'), 'sys_hub_flow');
+            this._saveRecord({
+                category:    'Flow',
+                name:        gr.getValue('name'),
+                label:       gr.getValue('name'),
+                scope:       gr.getDisplayValue('sys_scope'),
+                sys_id:      gr.getValue('sys_id'),
+                active:      gr.getValue('active'),
+                is_customized: true,
+                update_set:  usInfo.update_set,
+                updated_on:  usInfo.updated_on,
+                updated_by:  usInfo.updated_by
+            });
+        }
+    },
+
+    _collectRecordProducers: function() {
+        var gr = new GlideRecord('sc_cat_item_producer');
+        gr.addQuery('sys_update_name', 'ISNOTEMPTY', '');
+        this._addScopeExclusion(gr);
+        gr.query();
+        while (gr.next()) {
+            var isCustom = global.SncAppFiles.hasCustomerUpdate(gr);
+            if (!isCustom) continue;
+            var usInfo = this._getUpdateSetInfo(gr.getValue('sys_id'), 'sc_cat_item_producer');
+            this._saveRecord({
+                category:    'Record Producer',
+                name:        gr.getValue('name'),
+                label:       gr.getValue('name'),
+                scope:       gr.getDisplayValue('sys_scope'),
+                sys_id:      gr.getValue('sys_id'),
+                active:      gr.getValue('active'),
+                is_customized: true,
+                update_set:  usInfo.update_set,
+                updated_on:  usInfo.updated_on,
+                updated_by:  usInfo.updated_by
+            });
+        }
+    },
+
+    _collectNotifications: function() {
+        var gr = new GlideRecord('sysevent_email_action');
+        gr.addQuery('sys_update_name', 'ISNOTEMPTY', '');
+        this._addScopeExclusion(gr);
+        gr.query();
+        while (gr.next()) {
+            var isCustom = global.SncAppFiles.hasCustomerUpdate(gr);
+            if (!isCustom) continue;
+            var usInfo = this._getUpdateSetInfo(gr.getValue('sys_id'), 'sysevent_email_action');
+            this._saveRecord({
+                category:    'Notification',
+                name:        gr.getValue('name'),
+                label:       gr.getValue('name'),
+                scope:       gr.getDisplayValue('sys_scope'),
+                sys_id:      gr.getValue('sys_id'),
+                active:      gr.getValue('active'),
+                is_customized: true,
+                update_set:  usInfo.update_set,
+                updated_on:  usInfo.updated_on,
+                updated_by:  usInfo.updated_by
+            });
+        }
+    },
+
+    _collectInboundActions: function() {
+        var gr = new GlideRecord('sysevent_in_email_action');
+        gr.addQuery('sys_update_name', 'ISNOTEMPTY', '');
+        this._addScopeExclusion(gr);
+        gr.query();
+        while (gr.next()) {
+            var isCustom = global.SncAppFiles.hasCustomerUpdate(gr);
+            if (!isCustom) continue;
+            var usInfo = this._getUpdateSetInfo(gr.getValue('sys_id'), 'sysevent_in_email_action');
+            this._saveRecord({
+                category:    'Inbound Action',
+                name:        gr.getValue('name'),
+                label:       gr.getValue('name'),
+                scope:       gr.getDisplayValue('sys_scope'),
+                sys_id:      gr.getValue('sys_id'),
+                active:      gr.getValue('active'),
+                is_customized: true,
+                update_set:  usInfo.update_set,
+                updated_on:  usInfo.updated_on,
+                updated_by:  usInfo.updated_by
+            });
+        }
+    },
+
+    _collectSLAs: function() {
+        var gr = new GlideRecord('contract_sla');
+        gr.addQuery('sys_update_name', 'ISNOTEMPTY', '');
+        this._addScopeExclusion(gr);
+        gr.query();
+        while (gr.next()) {
+            var isCustom = global.SncAppFiles.hasCustomerUpdate(gr);
+            if (!isCustom) continue;
+            var usInfo = this._getUpdateSetInfo(gr.getValue('sys_id'), 'contract_sla');
+            this._saveRecord({
+                category:    'SLA Definition',
+                name:        gr.getValue('name'),
+                label:       gr.getValue('name'),
+                scope:       gr.getDisplayValue('sys_scope'),
+                sys_id:      gr.getValue('sys_id'),
+                active:      gr.getValue('active'),
+                is_customized: true,
+                update_set:  usInfo.update_set,
+                updated_on:  usInfo.updated_on,
+                updated_by:  usInfo.updated_by
+            });
+        }
+    },
+
+    _collectACLs: function() {
+        var gr = new GlideRecord('sys_security_acl');
+        gr.addQuery('sys_update_name', 'ISNOTEMPTY', '');
+        this._addScopeExclusion(gr);
+        gr.query();
+        while (gr.next()) {
+            var isCustom = global.SncAppFiles.hasCustomerUpdate(gr);
+            if (!isCustom) continue;
+            var usInfo = this._getUpdateSetInfo(gr.getValue('sys_id'), 'sys_security_acl');
+            this._saveRecord({
+                category:    'ACL',
+                name:        gr.getValue('name'),
+                label:       gr.getValue('name'),
+                scope:       gr.getDisplayValue('sys_scope'),
+                sys_id:      gr.getValue('sys_id'),
+                active:      gr.getValue('active'),
+                is_customized: true,
+                update_set:  usInfo.update_set,
+                updated_on:  usInfo.updated_on,
+                updated_by:  usInfo.updated_by
+            });
+        }
+    },
+
+    _saveRecord: function(data) {
+        try {
+            var inv = new GlideRecord(this.INVENTORY_TABLE);
+            inv.addQuery('u_sys_id_ref', data.sys_id);
+            inv.addQuery('u_category', data.category);
+            inv.query();
+
+            if (inv.next()) {
+                inv.setValue('u_name',           data.name);
+                inv.setValue('u_label',          data.label || data.name);
+                inv.setValue('u_scope',          data.scope);
+                inv.setValue('u_table_name',     data.table_name || '');
+                inv.setValue('u_active',         (data.active == 'true' || data.active === true || data.active == '1'));
+                inv.setValue('u_is_customized',  data.is_customized === true);
+                inv.setValue('u_update_set',     data.update_set || '');
+                inv.setValue('u_last_updated_on', data.updated_on || '');
+                inv.setValue('u_last_updated_by', data.updated_by || '');
+                inv.setValue('u_last_snapshot',  new GlideDateTime());
+                inv.update();
+            } else {
+                inv.initialize();
+                inv.setValue('u_category',       data.category);
+                inv.setValue('u_name',           data.name);
+                inv.setValue('u_label',          data.label || data.name);
+                inv.setValue('u_scope',          data.scope);
+                inv.setValue('u_sys_id_ref',     data.sys_id);
+                inv.setValue('u_table_name',     data.table_name || '');
+                inv.setValue('u_active',         (data.active == 'true' || data.active === true || data.active == '1'));
+                inv.setValue('u_is_customized',  data.is_customized === true);
+                inv.setValue('u_update_set',     data.update_set || '');
+                inv.setValue('u_last_updated_on', data.updated_on || '');
+                inv.setValue('u_last_updated_by', data.updated_by || '');
+                inv.setValue('u_last_snapshot',  new GlideDateTime());
+
+                var newId = inv.insert();
+                if (!newId) {
+                    throw new Error('insert() retornou vazio para '
+                        + data.category + ': ' + data.name);
+                }
+            }
+
+            this.results.collected++;
+
+        } catch(e) {
+            this.results.errors.push(
+                data.category + ': ' + data.name + ' - ' + e.message
+            );
+            gs.warn('CG_InventoryCollector erro: '
+                + data.category + ' - ' + data.name
+                + ' | ' + e.message);
+        }
+    },
+
+    type: 'CG_InventoryCollector'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+        <sys_created_on>2026-06-21 03:42:32</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>f4a85da647a90f14ddbed940f26d432f</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>CG_InventoryCollector</sys_name>
+        <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Customization Governance">36a07e0247690714ddbed940f26d43cf</sys_scope>
+        <sys_update_name>sys_script_include_f4a85da647a90f14ddbed940f26d432f</sys_update_name>
+        <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+        <sys_updated_on>2026-06-21 13:26:59</sys_updated_on>
+    </sys_script_include>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>f4a85da647a90f14ddbed940f26d432f</id>
+        <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+        <sys_created_on>2026-06-21 03:42:32</sys_created_on>
+        <sys_id>9789956e47a90f14ddbed940f26d43a5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+        <sys_updated_on>2026-06-21 03:42:32</sys_updated_on>
+        <table>sys_script_include</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

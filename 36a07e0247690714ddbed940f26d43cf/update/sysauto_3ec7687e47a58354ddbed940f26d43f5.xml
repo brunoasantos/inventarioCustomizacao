@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto">
+    <sysauto action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <advanced>false</advanced>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_run_end/>
+        <entered_run_start/>
+        <entered_time>1970-01-01 00:00:00</entered_time>
+        <max_drift/>
+        <name>CG - Customization Governance - Weekly Inventory_old</name>
+        <offset/>
+        <offset_type/>
+        <repeat_every/>
+        <run_as display_value="Administrador Sistema">e3d1430a0f49210068a24b9ce1050e02</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_daysofweek>7</run_daysofweek>
+        <run_end/>
+        <run_month>1</run_month>
+        <run_period/>
+        <run_start/>
+        <run_time>1970-01-01 05:00:00</run_time>
+        <run_type>weekly</run_type>
+        <run_weekinmonth>1</run_weekinmonth>
+        <sys_class_name>sysauto</sys_class_name>
+        <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+        <sys_created_on>2026-06-21 18:44:59</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>3ec7687e47a58354ddbed940f26d43f5</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>CG - Customization Governance - Weekly Inventory_old</sys_name>
+        <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Customization Governance">36a07e0247690714ddbed940f26d43cf</sys_scope>
+        <sys_update_name>sysauto_3ec7687e47a58354ddbed940f26d43f5</sys_update_name>
+        <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+        <sys_updated_on>2026-06-21 18:54:06</sys_updated_on>
+        <time_zone/>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto>
+</record_update>
