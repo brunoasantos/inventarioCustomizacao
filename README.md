@@ -1,0 +1,175 @@
+# Customization Governance
+
+**Inventário automatizado de customizações para instâncias ServiceNow.**
+
+Desenvolvido por [Bruno Santos](https://github.com/brunoasantos) | BairesLab
+
+---
+
+## O que é
+
+Customization Governance é uma aplicação ServiceNow que mapeia automaticamente todos os artefatos customizados de uma instância, usando o critério oficial da plataforma (`SncAppFiles.hasCustomerUpdate()`), o mesmo utilizado pelo mecanismo de upgrade do ServiceNow.
+
+O objetivo é responder com precisão à pergunta que todo cliente faz: **quantas customizações existem na minha instância, quem as criou e quando?**
+
+---
+
+## Por que isso importa
+
+Instâncias ServiceNow acumulam customizações ao longo dos anos. Muitas dessas customizações:
+
+- Não têm rastreabilidade de autoria
+- Estão em Update Sets sem nome ou no Default
+- Nunca foram documentadas
+- Impactam negativamente upgrades e manutenção
+
+Esta aplicação entrega um inventário confiável, auditável e apresentável para stakeholders — sem depender de estimativas ou análises manuais.
+
+---
+
+## Categorias mapeadas
+
+| Categoria | Tabela ServiceNow |
+|---|---|
+| Custom Tables | `sys_db_object` |
+| Custom Fields | `sys_dictionary` |
+| Business Rules | `sys_script` |
+| Client Scripts | `sys_script_client` |
+| UI Policies | `sys_ui_policy` |
+| UI Actions | `sys_ui_action` |
+| Script Includes | `sys_script_include` |
+| Scheduled Jobs | `sysauto_script` |
+| Flows | `sys_hub_flow` |
+| Record Producers | `sc_cat_item_producer` |
+| Notifications | `sysevent_email_action` |
+| Inbound Actions | `sysevent_in_email_action` |
+| SLA Definitions | `contract_sla` |
+| ACLs | `sys_security_acl` |
+
+---
+
+## Critério de customização
+
+O collector usa `SncAppFiles.hasCustomerUpdate()`, o mesmo método interno que o ServiceNow utiliza para identificar artefatos modificados pelo cliente durante upgrades. Isso elimina falsos positivos de artefatos OOB que apenas passaram por Update Sets de sistema.
+
+---
+
+## Estrutura da aplicação
+
+```
+Customization Governance (Global scope)
+├── Script Include: CG_InventoryCollector
+├── Scheduled Script Execution: CG - Weekly Inventory (domingo 02:00)
+├── Table: u_cg_inventory
+├── System Property: cg.excluded_scopes
+└── Platform Analytics Dashboard: Customization Governance
+```
+
+---
+
+## Instalação
+
+### Pré-requisitos
+
+- ServiceNow Zurich ou superior
+- Acesso de administrador na instância destino
+- Background Script execution habilitado
+
+### Passo a passo
+
+**1. Importar o Update Set**
+
+Na instância destino, acesse:
+
+```
+System Update Sets > Retrieved Update Sets > Import Update Set from XML
+```
+
+Faça upload do arquivo `Customization Governance.xml` e clique em **Upload**.
+
+**2. Preview e Commit**
+
+Clique em **Preview Update Set** e verifique que não há erros. Depois clique em **Commit Update Set**.
+
+**3. Configurar o scope excluído**
+
+Após o commit, acesse:
+
+```
+System Properties > cg.excluded_scopes
+```
+
+Preencha com o scope identifier da aplicação que deseja excluir da coleta, separados por vírgula. Exemplo:
+
+```
+x_astel_intell_app,x_outro_scope
+```
+
+> Deixe vazio se não houver scopes a excluir.
+
+**4. Rodar o inventário inicial**
+
+Acesse `System Definition > Background Scripts` e execute:
+
+```javascript
+var collector = new CG_InventoryCollector();
+var results = collector.runFullInventory();
+gs.info('Total: ' + results.collected + ' | Erros: ' + results.errors.length);
+```
+
+**5. Acessar o dashboard**
+
+Acesse `Platform Analytics > Dashboards` e abra **Customization Governance**.
+
+---
+
+## Campos da tabela u_cg_inventory
+
+| Campo | Tipo | Descrição |
+|---|---|---|
+| `u_category` | String | Categoria do artefato |
+| `u_name` | String | Nome técnico |
+| `u_label` | String | Label legível |
+| `u_scope` | String | Scope da aplicação |
+| `u_sys_id_ref` | String | Sys ID do artefato original |
+| `u_table_name` | String | Tabela onde o artefato atua |
+| `u_active` | Boolean | Se o artefato está ativo |
+| `u_is_customized` | Boolean | Confirmação pelo critério SncAppFiles |
+| `u_update_set` | String | Nome do Update Set de origem |
+| `u_last_updated_on` | DateTime | Data da última modificação |
+| `u_last_updated_by` | String | Responsável pela última modificação |
+| `u_last_snapshot` | DateTime | Data da última coleta |
+| `u_status` | Choice | active / to_remove / justified / oob_modified |
+| `u_notes` | String | Notas de decisão da equipe |
+
+---
+
+## Agendamento automático
+
+O inventário roda automaticamente todo domingo às 02:00 via `Scheduled Script Execution`. Para rodar manualmente:
+
+```
+System Definition > Scheduled Script Executions > CG - Customization Governance - Weekly Inventory > Execute Now
+```
+
+---
+
+## Portabilidade
+
+A aplicação foi projetada para ser instalada em qualquer instância ServiceNow. O único ajuste necessário por instância é a System Property `cg.excluded_scopes`.
+
+Testado em:
+- Ascenty HML (Zurich) — 8.445 customizações mapeadas
+- Runergy LAB (Zurich) — 485 customizações mapeadas
+
+---
+
+## Contribuição
+
+Pull requests são bem-vindos. Para mudanças significativas, abra uma issue primeiro para discutir o que você gostaria de alterar.
+
+---
+
+## Licença
+
+MIT
