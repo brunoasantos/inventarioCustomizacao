@@ -48,7 +48,7 @@ Esta aplicação entrega um inventário confiável, auditável e apresentável p
 | SLA Definitions | `contract_sla` |
 | ACLs | `sys_security_acl` |
 
-### v1.1.0 — Categorias adicionadas (9)
+### v1.2.0 — Categorias adicionadas (9)
 
 | Categoria | Tabela ServiceNow |
 |---|---|
@@ -72,7 +72,7 @@ O collector usa `SncAppFiles.hasCustomerUpdate()`, o mesmo método interno que o
 
 **Por que não usar `sys_metadata_customization`?**
 
-A tabela `sys_metadata_customization` com `author_type = Custom` contém ~102.000 registros na Ascenty HML, mas inclui ruído expressivo: artefatos deletados (~18.900), traduções e labels (~8.300), sub-artefatos internos de dashboards e ACLs. Nosso critério foca em artefatos executáveis de alto impacto, com número auditável e defensável categoria por categoria.
+A tabela `sys_metadata_customization` com `author_type = Custom` pode conter dezenas de milhares de registros em instâncias com histórico longo, mas inclui ruído expressivo: artefatos deletados, traduções e labels, sub-artefatos internos de dashboards e ACLs. Nosso critério foca em artefatos executáveis de alto impacto, com número auditável e defensável categoria por categoria.
 
 ---
 
@@ -145,7 +145,7 @@ System Properties > cg.excluded_scopes
 Preencha com o scope identifier da aplicação que deseja excluir da coleta, separados por vírgula. Exemplo:
 
 ```
-x_astel_intell_app,x_outro_scope
+x_minha_app,x_outro_scope
 ```
 
 > Deixe vazio se não houver scopes a excluir.
@@ -186,18 +186,23 @@ A aplicação foi projetada para ser instalada em qualquer instância ServiceNow
 
 | Instância | Versão | Customizações mapeadas |
 |---|---|---|
-| Ascenty HML | Zurich | *resultado do inventário v1.1.0 pendente* |
-| Ascenty HML | Zurich | 8.445 (v1.0.0 — 14 categorias) |
-| Runergy LAB | Zurich | 485 (v1.0.0 — 14 categorias) |
+| Instância de produção (grande porte) | Zurich | ~8.400 (v1.0.0 — 14 categorias) |
+| Instância LAB | Zurich | ~485 (v1.0.0 — 14 categorias) |
+| Instância LAB | Zurich | 493 (v1.2.0 — 23 categorias) |
 
 ---
 
 ## Changelog
 
-### v1.1.0
-- Adicionadas 9 novas categorias: Reports, SP Widgets, Custom Roles, Transform Maps, Data Sources, Catalog Items, UI Pages, Flow Actions, Scoped Apps
-- Análise comparativa com `sys_metadata_customization` (102.751 registros) — mantida abordagem por tabelas individuais com `SncAppFiles.hasCustomerUpdate()` por precisão e rastreabilidade de Update Set
+### v1.2.0
+- `_collectCustomFields` agora varre campos `u_` em **todas as tabelas** (portável entre instâncias), sem filtro hardcoded de tabelas específicas
+- `_collectScopedApps` corrigido: removidos filtros incompatíveis com `sys_app` (`sys_update_name`, `sys_scope`) que geravam warnings nos logs
+- Campo `scope` de Scoped Apps corrigido para usar `gr.getValue('scope')` (campo real da tabela)
 - Total de categorias: 23
+
+### v1.1.0 *(interno)*
+- Adicionadas 9 novas categorias: Reports, SP Widgets, Custom Roles, Transform Maps, Data Sources, Catalog Items, UI Pages, Flow Actions, Scoped Apps
+- Análise comparativa com `sys_metadata_customization` — mantida abordagem por tabelas individuais com `SncAppFiles.hasCustomerUpdate()` por precisão e rastreabilidade de Update Set
 
 ### v1.0.0
 - Release inicial com 14 categorias de artefatos executáveis
