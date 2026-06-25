@@ -187,6 +187,7 @@ A aplicação foi projetada para ser instalada em qualquer instância ServiceNow
 | Instância | Versão | Customizações mapeadas |
 |---|---|---|
 | Instância de produção (grande porte) | Zurich | ~8.400 (v1.0.0 — 14 categorias) |
+| Instância de produção (grande porte) | Zurich | 18.790 (v1.2.0 — 23 categorias) |
 | Instância LAB | Zurich | ~485 (v1.0.0 — 14 categorias) |
 | Instância LAB | Zurich | 493 (v1.2.0 — 23 categorias) |
 
