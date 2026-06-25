@@ -10,9 +10,10 @@
         <create_access_controls>true</create_access_controls>
         <delete_access>false</delete_access>
         <filter_extension/>
+        <is_data_interface>false</is_data_interface>
         <is_df_table>false</is_df_table>
         <is_extendable>false</is_extendable>
-        <label>Cg Inventory</label>
+        <label>CG Inventory</label>
         <live_feed_enabled>false</live_feed_enabled>
         <name>u_cg_inventory</name>
         <number_ref/>
@@ -23,13 +24,11 @@
         <sys_class_name>sys_db_object</sys_class_name>
         <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
         <sys_created_on>2026-06-19 20:49:17</sys_created_on>
-        <sys_customer_update>false</sys_customer_update>
         <sys_id>7b01728a47690714ddbed940f26d43ab</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>CG Inventory</sys_name>
         <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
         <sys_policy/>
-        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Customization Governance">36a07e0247690714ddbed940f26d43cf</sys_scope>
         <sys_update_name>sys_db_object_7b01728a47690714ddbed940f26d43ab</sys_update_name>
         <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>

@@ -4,12 +4,12 @@
         <array>false</array>
         <attributes/>
         <audit>false</audit>
-        <calculation>(function calculatedFieldValue(current) {&#13;
-&#13;
-	// Add your code here&#13;
-	return '';  // return the calculated value&#13;
-&#13;
-})(current);</calculation>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
         <choice/>
         <choice_field/>
         <choice_table/>
@@ -39,6 +39,7 @@
         <next_element/>
         <primary>false</primary>
         <read_only>false</read_only>
+        <read_only_option/>
         <read_roles/>
         <reference/>
         <reference_cascade_rule/>
@@ -52,12 +53,10 @@
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
         <sys_created_on>2026-06-19 21:00:22</sys_created_on>
-        <sys_customer_update>false</sys_customer_update>
         <sys_id>90f2bec647a90714ddbed940f26d43c9</sys_id>
         <sys_name>Notes</sys_name>
         <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
         <sys_policy/>
-        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Customization Governance">36a07e0247690714ddbed940f26d43cf</sys_scope>
         <sys_update_name>sys_dictionary_u_cg_inventory_u_notes</sys_update_name>
         <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>

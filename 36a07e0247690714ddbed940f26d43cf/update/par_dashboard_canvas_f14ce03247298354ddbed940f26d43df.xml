@@ -6,15 +6,14 @@
         <sys_class_name>par_dashboard_canvas</sys_class_name>
         <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
         <sys_created_on>2026-06-21 19:03:13</sys_created_on>
-        <sys_customer_update>false</sys_customer_update>
         <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
         <sys_id>f14ce03247298354ddbed940f26d43df</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name/>
         <sys_overrides/>
         <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
         <sys_policy/>
-        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Customization Governance">36a07e0247690714ddbed940f26d43cf</sys_scope>
         <sys_update_name>par_dashboard_canvas_f14ce03247298354ddbed940f26d43df</sys_update_name>
         <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
