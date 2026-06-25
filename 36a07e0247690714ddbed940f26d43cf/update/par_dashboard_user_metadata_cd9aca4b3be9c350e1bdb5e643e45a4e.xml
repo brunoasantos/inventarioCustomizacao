@@ -21,7 +21,7 @@
         <include_trends>true</include_trends>
         <include_widget_notification>true</include_widget_notification>
         <last_deactivated_on/>
-        <last_updated_on>2026-06-22 20:43:29</last_updated_on>
+        <last_updated_on>2026-06-25 20:41:12</last_updated_on>
         <po_project_id_list>[]</po_project_id_list>
         <refresh_information>true</refresh_information>
         <refresh_interval>-1</refresh_interval>
@@ -35,7 +35,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>cd9aca4b3be9c350e1bdb5e643e45a4e</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>77</sys_mod_count>
         <sys_name/>
         <sys_overrides/>
         <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
@@ -43,7 +43,7 @@
         <sys_scope display_value="Customization Governance">36a07e0247690714ddbed940f26d43cf</sys_scope>
         <sys_update_name>par_dashboard_user_metadata_cd9aca4b3be9c350e1bdb5e643e45a4e</sys_update_name>
         <sys_updated_by>bruno.wurzius</sys_updated_by>
-        <sys_updated_on>2026-06-22 20:43:29</sys_updated_on>
+        <sys_updated_on>2026-06-25 20:41:24</sys_updated_on>
         <updated_by_user display_value="Bruno Wurzius Aires">078a872f3b1843109caaa19693e45a9c</updated_by_user>
         <use_custom_tab_colors>false</use_custom_tab_colors>
         <widgets_margin>$now-global-space--sm</widgets_margin>

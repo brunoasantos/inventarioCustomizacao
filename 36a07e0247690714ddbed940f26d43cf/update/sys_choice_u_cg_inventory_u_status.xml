@@ -91,10 +91,10 @@
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>48743a0247e90714ddbed940f26d4310</sys_id>
-            <sys_mod_count>2</sys_mod_count>
-            <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
-            <sys_updated_on>2026-06-19 21:03:03</sys_updated_on>
-            <value>obb_modified</value>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>bruno.wurzius</sys_updated_by>
+            <sys_updated_on>2026-06-25 18:32:36</sys_updated_on>
+            <value>oob_modified</value>
         </sys_choice>
     </sys_choice>
 </record_update>
