@@ -29,6 +29,8 @@ Esta aplicação entrega um inventário confiável, auditável e apresentável p
 
 ## Categorias mapeadas
 
+### v1.0.0 — Categorias originais (14)
+
 | Categoria | Tabela ServiceNow |
 |---|---|
 | Custom Tables | `sys_db_object` |
@@ -46,11 +48,31 @@ Esta aplicação entrega um inventário confiável, auditável e apresentável p
 | SLA Definitions | `contract_sla` |
 | ACLs | `sys_security_acl` |
 
+### v1.1.0 — Categorias adicionadas (9)
+
+| Categoria | Tabela ServiceNow |
+|---|---|
+| Reports | `sys_report` |
+| SP Widgets | `sp_widget` |
+| Custom Roles | `sys_user_role` |
+| Transform Maps | `sys_transform_map` |
+| Data Sources | `sys_data_source` |
+| Catalog Items | `sc_cat_item` |
+| UI Pages | `sys_ui_page` |
+| Flow Actions | `sys_hub_action_type_definition` |
+| Scoped Apps | `sys_app` |
+
+> **Nota sobre Scoped Apps:** esta categoria não aplica o filtro `SncAppFiles.hasCustomerUpdate()` pois aplicações criadas do zero pelo cliente não são modificações de artefatos OOB. Todas as Scoped Apps encontradas são coletadas. Use o filtro de categoria no dashboard para incluir ou excluir esse grupo dos totais.
+
 ---
 
 ## Critério de customização
 
 O collector usa `SncAppFiles.hasCustomerUpdate()`, o mesmo método interno que o ServiceNow utiliza para identificar artefatos modificados pelo cliente durante upgrades. Isso elimina falsos positivos de artefatos OOB que apenas passaram por Update Sets de sistema.
+
+**Por que não usar `sys_metadata_customization`?**
+
+A tabela `sys_metadata_customization` com `author_type = Custom` contém ~102.000 registros na Ascenty HML, mas inclui ruído expressivo: artefatos deletados (~18.900), traduções e labels (~8.300), sub-artefatos internos de dashboards e ACLs. Nosso critério foca em artefatos executáveis de alto impacto, com número auditável e defensável categoria por categoria.
 
 ---
 
@@ -59,11 +81,32 @@ O collector usa `SncAppFiles.hasCustomerUpdate()`, o mesmo método interno que o
 ```
 Customization Governance (Global scope)
 ├── Script Include: CG_InventoryCollector
-├── Scheduled Script Execution: CG - Weekly Inventory (domingo 02:00)
+├── Scheduled Script Execution: CG – Weekly Inventory (domingo 02:00)
 ├── Table: u_cg_inventory
 ├── System Property: cg.excluded_scopes
 └── Platform Analytics Dashboard: Customization Governance
 ```
+
+---
+
+## Campos da tabela `u_cg_inventory`
+
+| Campo | Tipo | Descrição |
+|---|---|---|
+| `u_category` | String | Categoria do artefato |
+| `u_name` | String | Nome técnico |
+| `u_label` | String | Label legível |
+| `u_scope` | String | Scope da aplicação |
+| `u_sys_id_ref` | String | Sys ID do artefato original |
+| `u_table_name` | String | Tabela onde o artefato atua |
+| `u_active` | Boolean | Se o artefato está ativo |
+| `u_is_customized` | Boolean | Confirmação pelo critério SncAppFiles |
+| `u_update_set` | String | Nome do Update Set de origem |
+| `u_last_updated_on` | DateTime | Data da última modificação |
+| `u_last_updated_by` | String | Responsável pela última modificação |
+| `u_last_snapshot` | DateTime | Data da última coleta |
+| `u_status` | Choice | `active` / `to_remove` / `justified` / `oob_modified` |
+| `u_notes` | String | Notas de decisão da equipe |
 
 ---
 
@@ -123,34 +166,15 @@ Acesse `Platform Analytics > Dashboards` e abra **Customization Governance**.
 
 ---
 
-## Campos da tabela u_cg_inventory
-
-| Campo | Tipo | Descrição |
-|---|---|---|
-| `u_category` | String | Categoria do artefato |
-| `u_name` | String | Nome técnico |
-| `u_label` | String | Label legível |
-| `u_scope` | String | Scope da aplicação |
-| `u_sys_id_ref` | String | Sys ID do artefato original |
-| `u_table_name` | String | Tabela onde o artefato atua |
-| `u_active` | Boolean | Se o artefato está ativo |
-| `u_is_customized` | Boolean | Confirmação pelo critério SncAppFiles |
-| `u_update_set` | String | Nome do Update Set de origem |
-| `u_last_updated_on` | DateTime | Data da última modificação |
-| `u_last_updated_by` | String | Responsável pela última modificação |
-| `u_last_snapshot` | DateTime | Data da última coleta |
-| `u_status` | Choice | active / to_remove / justified / oob_modified |
-| `u_notes` | String | Notas de decisão da equipe |
-
----
-
 ## Agendamento automático
 
 O inventário roda automaticamente todo domingo às 02:00 via `Scheduled Script Execution`. Para rodar manualmente:
 
 ```
-System Definition > Scheduled Script Executions > CG - Customization Governance - Weekly Inventory > Execute Now
+System Definition > Scheduled Script Executions > CG – Customization Governance – Weekly Inventory
 ```
+
+Clique em **Execute Now**.
 
 ---
 
@@ -158,9 +182,29 @@ System Definition > Scheduled Script Executions > CG - Customization Governance 
 
 A aplicação foi projetada para ser instalada em qualquer instância ServiceNow. O único ajuste necessário por instância é a System Property `cg.excluded_scopes`.
 
-Testado em:
-- Ascenty HML (Zurich) — 8.445 customizações mapeadas
-- Runergy LAB (Zurich) — 485 customizações mapeadas
+**Testado em:**
+
+| Instância | Versão | Customizações mapeadas |
+|---|---|---|
+| Ascenty HML | Zurich | *resultado do inventário v1.1.0 pendente* |
+| Ascenty HML | Zurich | 8.445 (v1.0.0 — 14 categorias) |
+| Runergy LAB | Zurich | 485 (v1.0.0 — 14 categorias) |
+
+---
+
+## Changelog
+
+### v1.1.0
+- Adicionadas 9 novas categorias: Reports, SP Widgets, Custom Roles, Transform Maps, Data Sources, Catalog Items, UI Pages, Flow Actions, Scoped Apps
+- Análise comparativa com `sys_metadata_customization` (102.751 registros) — mantida abordagem por tabelas individuais com `SncAppFiles.hasCustomerUpdate()` por precisão e rastreabilidade de Update Set
+- Total de categorias: 23
+
+### v1.0.0
+- Release inicial com 14 categorias de artefatos executáveis
+- Critério `SncAppFiles.hasCustomerUpdate()` substituindo `sys_update_name ISNOTEMPTY` (eliminação de ~93% de falsos positivos)
+- System Property `cg.excluded_scopes` para portabilidade entre instâncias
+- Scheduled Job semanal (domingo 02:00) para minimizar impacto em produção 24x7
+- Dashboard Platform Analytics com 6 visualizações
 
 ---
 
