@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>bruno.wurzius</sys_created_by>
+        <sys_created_on>2026-06-22 20:17:05</sys_created_on>
+        <sys_id>42b64a433be9c350e1bdb5e643e45a4d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>u_cg_inventory.snc_internal</sys_name>
+        <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Customization Governance">36a07e0247690714ddbed940f26d43cf</sys_scope>
+        <sys_security_acl display_value="u_cg_inventory">40617a0e47690714ddbed940f26d433f</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_42b64a433be9c350e1bdb5e643e45a4d</sys_update_name>
+        <sys_updated_by>bruno.wurzius</sys_updated_by>
+        <sys_updated_on>2026-06-22 20:17:05</sys_updated_on>
+        <sys_user_role display_value="snc_internal" name="snc_internal">7fcaa702933002009c8579b4f47ffbde</sys_user_role>
+    </sys_security_acl_role>
+</record_update>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="par_dashboard_tab">
+    <par_dashboard_tab action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <background_color/>
+        <dashboard display_value="Customization Governance">794ce03247298354ddbed940f26d4390</dashboard>
+        <name>High Impact</name>
+        <order>2</order>
+        <sys_class_name>par_dashboard_tab</sys_class_name>
+        <sys_created_by>bruno.wurzius</sys_created_by>
+        <sys_created_on>2026-06-25 20:15:33</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>2c33ed443bb9cb509caaa19693e45a9f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>High Impact</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Customization Governance">36a07e0247690714ddbed940f26d43cf</sys_scope>
+        <sys_update_name>par_dashboard_tab_2c33ed443bb9cb509caaa19693e45a9f</sys_update_name>
+        <sys_updated_by>bruno.wurzius</sys_updated_by>
+        <sys_updated_on>2026-06-25 20:15:33</sys_updated_on>
+    </par_dashboard_tab>
+</record_update>

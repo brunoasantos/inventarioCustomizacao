@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="par_dashboard_widget">
+    <par_dashboard_widget action="INSERT_OR_UPDATE">
+        <canvas display_value="">7d4ce03247298354ddbed940f26d43e9</canvas>
+        <component display_value="Pie">96abe7e38d8790718022c5630a92176c</component>
+        <component_props>{"configVersion":"23.0.0-ci-SNAPSHOT","showDataLabels":true,"dataLabelsType":"both","truncationType":"end","showRegister":true,"registerPosition":"bottom","registerOrientation":"horizontal","showRegisterOnSameLine":false,"showRegisterValue":false,"legendHorizontalAlignment":"center","legendExpandToFit":false,"showRegisterPercentage":false,"showPercentageOfTotalInTooltip":true,"colorConfig":{"type":"default"},"newReporting":false,"enableAddZerosAtApi":true,"dataSources":[{"isDatabaseView":false,"allowRealTime":true,"label":"CG Inventory","sourceType":"table","tableOrViewName":"u_cg_inventory","preferredVisualizations":["d24d53f60350de7a652caf3188a46ed2"],"id":"dGFibGV1X2NnX2ludmVudG9yeTE3ODIwNjg3ODUyNzg=","dataCategories":["trend","group","simple"]}],"showHeader":true,"showTotalAggregate":false,"showSubAggregate":false,"showFirstGroupAggregate":false,"showSecondGroupAggregate":false,"hideMatrixAggregate":false,"lineClamp":1,"headerTitleAlignment":"start","wrapTitle":false,"showLoadingIndicator":false,"showHeaderSeparator":true,"headerTitle":"Distribution by Status","headingLevel":2,"showBorder":true,"bareBorder":false,"showDataPassthrough":false,"showAdditionalGroupBySelector":false,"allowAdditionalGroupByPerMetric":false,"metrics":[{"dataSource":"dGFibGV1X2NnX2ludmVudG9yeTE3ODIwNjg3ODUyNzg=","id":"ZEdGaWJHVjFYMk5uWDJsdWRtVnVkRzl5ZVRFM09ESXdOamczT0RVeU56Zz0xNzgyMDY4Nzg1OTM5","aggregateFunction":"COUNT","numberFormat":{"customFormat":false},"axisId":"primary"}],"groupBy":[{"groupBy":[{"dataSource":"dGFibGV1X2NnX2ludmVudG9yeTE3ODIwNjg3ODUyNzg=","groupByField":"u_status","isRange":false,"isChoice":true,"isPaBucket":false}],"maxNumberOfGroups":10,"numberOfGroupsBasedOn":"NO_OF_GROUP_BASED_ON_PER_METRIC","showOthers":true,"disableRanges":false}],"sortBy":"value","sortByOrder":"desc","showChange":false,"showChangePercentage":false,"showTarget":false,"showForecast":false,"showForecastRange":false,"showTrend":false,"showConfidenceBand":false,"showGapPercentage":false,"showSparkline":false,"showMetricLabel":false,"showThreshold":false,"showComment":false,"followFilters":true,"showFilterIcon":true,"enableRealTimeUpdate":false,"enableDrilldown":true,"enableClickAndStay":false,"showDataTable":false,"enableCustomEmptyState":false,"componentId":"ia9cg6z5","emptyStateIllustration":"no-data","emptyStateHeading":"No data available.","emptyStateHeadingLevel":3,"emptyStateContent":"There are no scores available for the selected criteria. Contact your admin for more info.","emptyStateAlignment":"vertical-centered","hideDevSettings":false,"filterConfigurations":"@state.parFilters","showMaximumRange":false,"allowChangeDateRange":false,"showDateRangeByDefault":false,"applyDateRange":false,"numberOfPeriods":3,"showAbsolutePeriod":false,"autoAggregatePeriods":false,"showChangeFrom":false,"useCurrentDateForEnd":false,"period":"M","useDataCache":false,"cacheExpirationTime":0,"showCacheTime":true,"dateFormat":"default","showRefresh":true,"showExportOptions":true,"showFilterAsSeparateSeries":false,"userInfo":"@context.session.user","scoreType":null,"filterPerMetric":[]}</component_props>
+        <h>25</h>
+        <name/>
+        <required_translations>[{"message":"CG Inventory","comment":"","code":"PAR_DASHBOARD.7d4ce03247298354ddbed940f26d43e9.35ce207e47298354ddbed940f26d4304"},{"message":"Distribution by Status","comment":"","code":"PAR_DASHBOARD.7d4ce03247298354ddbed940f26d43e9.35ce207e47298354ddbed940f26d4304"},{"message":"No data available.","comment":"","code":"PAR_DASHBOARD.7d4ce03247298354ddbed940f26d43e9.35ce207e47298354ddbed940f26d4304"},{"message":"There are no scores available for the selected criteria. Contact your admin for more info.","comment":"","code":"PAR_DASHBOARD.7d4ce03247298354ddbed940f26d43e9.35ce207e47298354ddbed940f26d4304"}]</required_translations>
+        <stored_component/>
+        <sys_class_name>par_dashboard_widget</sys_class_name>
+        <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+        <sys_created_on>2026-06-21 19:14:09</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>35ce207e47298354ddbed940f26d4304</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Customization Governance">36a07e0247690714ddbed940f26d43cf</sys_scope>
+        <sys_update_name>par_dashboard_widget_35ce207e47298354ddbed940f26d4304</sys_update_name>
+        <sys_updated_by>bruno.wurzius</sys_updated_by>
+        <sys_updated_on>2026-06-25 20:41:11</sys_updated_on>
+        <visualization/>
+        <w>16</w>
+        <widget_props/>
+        <x>0</x>
+        <y>28</y>
+    </par_dashboard_widget>
+</record_update>

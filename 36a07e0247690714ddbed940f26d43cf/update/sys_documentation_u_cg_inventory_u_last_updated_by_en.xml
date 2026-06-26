@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="u_last_updated_by" label="Last Updated By" language="en" table="u_cg_inventory">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>u_last_updated_by</element>
+            <help/>
+            <hint/>
+            <label>Last Updated By</label>
+            <language>en</language>
+            <name>u_cg_inventory</name>
+            <plural>Last Updated Bys</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
+            <sys_created_on>2026-06-21 13:12:35</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Last Updated By</sys_name>
+            <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Customization Governance">36a07e0247690714ddbed940f26d43cf</sys_scope>
+            <sys_update_name>sys_documentation_u_cg_inventory_u_last_updated_by_en</sys_update_name>
+            <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
+            <sys_updated_on>2026-06-21 13:12:35</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>
