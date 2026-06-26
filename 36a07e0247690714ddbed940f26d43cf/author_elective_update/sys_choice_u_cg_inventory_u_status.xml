@@ -6,7 +6,6 @@
             <sys_class_name>sys_choice_set</sys_class_name>
             <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
             <sys_created_on>2026-06-19 21:02:08</sys_created_on>
-            <sys_id>0054face47a90714ddbed940f26d43f4</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_name>u_status</sys_name>
             <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
@@ -30,7 +29,6 @@
             <sys_created_on>2026-06-19 21:02:08</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
-            <sys_id>e1447ace47a90714ddbed940f26d43f5</sys_id>
             <sys_mod_count>2</sys_mod_count>
             <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
             <sys_updated_on>2026-06-19 21:02:15</sys_updated_on>
@@ -50,7 +48,6 @@
             <sys_created_on>2026-06-19 21:02:22</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
-            <sys_id>cc54face47a90714ddbed940f26d43b0</sys_id>
             <sys_mod_count>2</sys_mod_count>
             <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
             <sys_updated_on>2026-06-19 21:02:30</sys_updated_on>
@@ -70,7 +67,6 @@
             <sys_created_on>2026-06-19 21:02:40</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
-            <sys_id>ff54720247e90714ddbed940f26d43de</sys_id>
             <sys_mod_count>2</sys_mod_count>
             <sys_updated_by>bruno.santos1@servicenow.com</sys_updated_by>
             <sys_updated_on>2026-06-19 21:02:45</sys_updated_on>
@@ -90,7 +86,6 @@
             <sys_created_on>2026-06-19 21:02:55</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
-            <sys_id>48743a0247e90714ddbed940f26d4310</sys_id>
             <sys_mod_count>3</sys_mod_count>
             <sys_updated_by>bruno.wurzius</sys_updated_by>
             <sys_updated_on>2026-06-25 18:32:36</sys_updated_on>

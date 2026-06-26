@@ -53,7 +53,6 @@
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
         <sys_created_on>2026-06-21 13:11:17</sys_created_on>
-        <sys_id>9cab13e247a5cf14ddbed940f26d43e2</sys_id>
         <sys_name>Update Set</sys_name>
         <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
         <sys_policy/>

@@ -53,7 +53,6 @@
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>bruno.santos1@servicenow.com</sys_created_by>
         <sys_created_on>2026-06-19 20:49:18</sys_created_on>
-        <sys_id>1c61fa0e47690714ddbed940f26d4344</sys_id>
         <sys_name>u_cg_inventory</sys_name>
         <sys_package display_value="Customization Governance" source="36a07e0247690714ddbed940f26d43cf">36a07e0247690714ddbed940f26d43cf</sys_package>
         <sys_policy/>
@@ -73,4 +72,18 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_dictionary>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Customization Governance">36a07e0247690714ddbed940f26d43cf</claim_owner_scope>
+        <claim_timestamp>19f017d3a410000001</claim_timestamp>
+        <metadata_update_name>sys_dictionary_u_cg_inventory_null</metadata_update_name>
+        <previous_claim_app_version>1.3.0</previous_claim_app_version>
+        <previous_claim_name>Customization Governance</previous_claim_name>
+        <previous_claim_scope>36a07e0247690714ddbed940f26d43cf</previous_claim_scope>
+        <sys_created_by>bruno.wurzius</sys_created_by>
+        <sys_created_on>2026-06-26 01:13:32</sys_created_on>
+        <sys_id>5567e6843bb10f509caaa19693e45aa8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bruno.wurzius</sys_updated_by>
+        <sys_updated_on>2026-06-26 01:13:32</sys_updated_on>
+    </sys_claim>
 </record_update>
